@@ -14,16 +14,18 @@ module.exports = function(grunt) {
 
 		sass: {
 			options: {
-				unixNewlines: true,
-				style: 'nested'
+				style: 'nested',
+				unixNewlines: true
 			},
-			files: [{
-				expand: true,
-				cwd: 'scss',
-				src: ['**/*.scss', ],
-				dest: 'css',
-				ext: '.css'
-			}],
+			all: {
+				files: [{
+					expand: true,
+					cwd: 'scss',
+					src: ['**/*.scss'],
+					dest: 'css',
+					ext: '.css'
+				}]
+			}
 		},
 
 
@@ -33,11 +35,14 @@ module.exports = function(grunt) {
 		// https://npmjs.org/package/grunt-contrib-watch
 
 		watch: {
-			sass: {
-				files: ['**/*.scss', ],
-				tasks: ['sass:all']
+			options: {
+				livereload: true
 			},
-		},
+			sass: {
+				files: ['**/*.scss'],
+				tasks: ['sass:all']
+			}
+		}
 
 	});
 
@@ -46,6 +51,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Register Grunt tasks
-	grunt.registerTask('default', ['sass']);
+	grunt.registerTask('default', ['sass:all']);
 
 };
