@@ -14,6 +14,7 @@ module.exports = function(grunt) {
 
 		sass: {
 			options: {
+				precision: 3,
 				style: 'nested',
 				unixNewlines: true
 			},

@@ -1,8 +1,10 @@
+// -----------------------------------------------------------------------------
 // Clearfix
 // -----------------------------------------------------------------------------
 // Micro clearfix: http://nicolasgallagher.com/micro-clearfix-hack/
 // -----------------------------------------------------------------------------
-// For modern browsers
+//
+// For modern browsers:
 //
 // 1. The space content is one way to avoid an Opera bug when the
 //    contenteditable attribute is included anywhere else in the document.
@@ -13,7 +15,8 @@
 //    `:before` to contain the top-margins of child elements.
 //
 // -----------------------------------------------------------------------------
-// Example use:
+//
+// Example usage:
 //
 //    .container {
 //        @include clearfix;
