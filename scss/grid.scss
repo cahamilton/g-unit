@@ -3,8 +3,31 @@
 
 @import "grid-settings";
 
-.test {
-   margin: em($values : 0 10px);
-   padding: em(16px 32px 48px 64px);
-   font-size: em($values : 12px, $base-value : 18px);
+// -----------------------------------------------------------------------------
+// Grid Row
+// -----------------------------------------------------------------------------
+// Grid row mixin is used to create a container around the grid units. A
+// cleafix is applied to contain and clear floats inside.
+// -----------------------------------------------------------------------------
+//
+// Example usage:
+//
+//    .row {
+//        @include grid-row;
+//    }
+//
+
+@mixin grid-row {
+	@include clearfix;
+
+	// Nested grid rows
+	& & {
+		margin-right: -#{$unit-gutter};
+		margin-left: -#{$unit-gutter};
+	}
+
+}
+
+.test-row {
+	@include grid-row;
 }
