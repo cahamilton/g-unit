@@ -90,3 +90,57 @@
 .test-unit-6 {
 	@include grid-unit-base($gutter: 0px, $float: left);
 }
+
+
+// -----------------------------------------------------------------------------
+// Grid Unit Calc
+// -----------------------------------------------------------------------------
+//
+// Grid unit calc is used to calculate width measurements for units.
+//
+// Arguments:
+//
+// 1. $count - a unit count of the total ratio
+//
+// 2. $ratio - the total number of units in the ratio
+//
+// -----------------------------------------------------------------------------
+//
+// Example usage:
+//
+//    .unit-4of7 {
+//        @include grid-unit-calc(4, 7);
+//    }
+//
+
+@mixin grid-unit-calc($count, $ratio) {
+
+	@if $count > $ratio {
+		@warn "Mixin $count argument should not be greater than the $ratio argument (#{$count} > #{$ratio}). Please address your mixin values and try again.";
+	}
+
+	@else {
+		width: ($count / $ratio) * 100%;
+	}
+
+}
+
+.test-1of3 {
+	@include grid-unit-calc(1, 3);
+}
+
+.test-2of3 {
+	@include grid-unit-calc($count: 2, $ratio: 3);
+}
+
+.test-1of7 {
+	@include grid-unit-calc($ratio: 7, $count: 1);
+}
+
+.test-3of5 {
+	@include grid-unit-calc($count: 3, $ratio: 5);
+}
+
+.test-6of4 {
+	@include grid-unit-calc($count: 6, $ratio: 4);
+}
