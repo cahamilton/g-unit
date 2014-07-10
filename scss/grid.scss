@@ -6,8 +6,10 @@
 // -----------------------------------------------------------------------------
 // Grid Row
 // -----------------------------------------------------------------------------
+//
 // Grid row mixin is used to create a container around the grid units. A
 // cleafix is applied to contain and clear floats inside.
+//
 // -----------------------------------------------------------------------------
 //
 // Example usage:
@@ -30,4 +32,61 @@
 
 .test-row {
 	@include grid-row;
+}
+
+
+// -----------------------------------------------------------------------------
+// Grid Unit Base
+// -----------------------------------------------------------------------------
+//
+// Grid unit base is used to create the base properties for units.
+//
+// Arguments:
+//
+// 1. $gutter - default set to $unit-gutter (_grid-settings.scss)
+//
+// 2. $float - default set to $unit-float (_grid-settings.scss)
+//
+// -----------------------------------------------------------------------------
+//
+// Example usage:
+//
+//    .unit {
+//        @include grid-unit-base(20px, right);
+//    }
+//
+
+@mixin grid-unit-base($gutter: $unit-gutter, $float: $unit-float) {
+	position: relative;
+	float: $float;
+
+	@if $gutter != null and $gutter > 0 {
+		padding-right: em($gutter);
+		padding-left: em($gutter);
+	}
+
+}
+
+.test-unit-1 {
+	@include grid-unit-base;
+}
+
+.test-unit-2 {
+	@include grid-unit-base(20px, left);
+}
+
+.test-unit-3 {
+	@include grid-unit-base($gutter: 30px);
+}
+
+.test-unit-4 {
+	@include grid-unit-base($float: right);
+}
+
+.test-unit-5 {
+	@include grid-unit-base($gutter: null, $float: right);
+}
+
+.test-unit-6 {
+	@include grid-unit-base($gutter: 0px, $float: left);
 }

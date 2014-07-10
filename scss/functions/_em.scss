@@ -38,7 +38,7 @@
 	@else {
 
 		// Created list with no values
-		$converted-values : null ;
+		$converted-values : () ;
 
 		@each $value in $values {
 
