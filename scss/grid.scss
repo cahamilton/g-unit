@@ -82,7 +82,7 @@
 //    }
 //
 
-@mixin grid-unit-calc($count, $ratio) {
+@mixin grid-unit-calc($count, $ratio, $push: null, $pull: null) {
 
 	@if $count > $ratio {
 		@warn "Mixin $count argument should not be greater than the $ratio argument (#{$count} > #{$ratio}). Please address your mixin values and try again.";
@@ -90,6 +90,16 @@
 
 	@else {
 		width: ($count / $ratio) * 100%;
+	}
+
+	@if $push != null {
+		right: auto;
+		left: (1 / $ratio) * 100% * $push;
+	}
+
+	@if $pull != null {
+		right: (1 / $ratio) * 100% * $pull;
+		left: auto;
 	}
 
 }
@@ -228,4 +238,24 @@
 
 	@include grid-generator($unit-prefix, $grid-breakpoint, $grid-container-width, $unit-gutter, $unit-ratios);
 
+}
+
+.gu-sass-push-pull-test {
+	@include grid-unit-base;
+}
+
+.gu-sass-push-pull-test-1 {
+	@include grid-unit-calc(1, 4, 3, null);
+}
+
+.gu-sass-push-pull-test-2 {
+	@include grid-unit-calc(1, 4, 1, null);
+}
+
+.gu-sass-push-pull-test-3 {
+	@include grid-unit-calc(1, 4, null, 1);
+}
+
+.gu-sass-push-pull-test-4 {
+	@include grid-unit-calc(1, 4, null, 3);
 }
