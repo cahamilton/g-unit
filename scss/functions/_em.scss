@@ -35,6 +35,10 @@
 
 	}
 
+	@if $values == null {
+		@return null;
+	}
+
 	@else {
 
 		// Created list with no values
