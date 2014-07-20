@@ -30,6 +30,24 @@ module.exports = function(grunt) {
 		},
 
 
+		// Minify CSS
+
+		// https://github.com/gruntjs/grunt-contrib-cssmin
+		// https://npmjs.org/package/grunt-contrib-cssmin
+
+		cssmin: {
+			all: {
+				files: [{
+					expand: true,
+					cwd: 'css',
+					src: ['**/*.css'],
+					dest: 'css',
+					ext: '.css'
+				}]
+			}
+		},
+
+
 		// Watch files
 
 		// https://github.com/gruntjs/grunt-contrib-watch
@@ -37,7 +55,8 @@ module.exports = function(grunt) {
 
 		watch: {
 			options: {
-				livereload: true
+				livereload: true,
+				reload: true
 			},
 			sass: {
 				files: ['**/*.scss'],
@@ -48,10 +67,19 @@ module.exports = function(grunt) {
 	});
 
 	// Loads Grunt plugins
+	grunt.loadNpmTasks('grunt-notify');
 	grunt.loadNpmTasks('grunt-contrib-sass');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Register Grunt tasks
-	grunt.registerTask('default', ['sass:all']);
+	grunt.registerTask('default', [
+		'sass:all'
+	]);
+
+	grunt.registerTask('build', [
+		'sass:all',
+		'cssmin:all'
+	]);
 
 };
