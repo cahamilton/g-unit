@@ -1,0 +1,63 @@
+// -----------------------------------------------------------------------------
+// Convert Units
+// -----------------------------------------------------------------------------
+//
+// The following function will convert 'px' values to 'em' units.
+//
+// Arguments:
+//
+// 1. A maximum of 4 'px' values to convert
+//
+// 2. A base 'px' value to calculate 'em' units against. This is optional and
+//    will default to what $default-font-size is set as - but can be overridden
+//    to avoid unit compounding issues.
+//
+// -----------------------------------------------------------------------------
+//
+// Example usage:
+//
+//    .element {
+//        margin: em($values : 0 10px);
+//        padding: em(10px 20px 30px 40px);
+//        font-size: em($values : 12px, $base-value : 18px);
+//    }
+//
+
+@function em($values, $base-value: $default-font-size) {
+
+	// Check if values exceeds maximum allowed
+	@if length($values) > 4 {
+
+		@warn "Function arguments exceed the maximum of 4 allowed.";
+
+		// Return nothing
+		@return null;
+
+	}
+
+	@if $values == null {
+		@return null;
+	}
+
+	@else {
+
+		// Created list with no values
+		$converted-values : () ;
+
+		@each $value in $values {
+
+			@if $value == 0 {
+				$value : 0px;
+			}
+
+			// Iterate through each value and append converted value to the list
+			$converted-values : append($converted-values, $value / $base-value * 1em) ;
+
+		}
+
+		// Return newly populated list
+		@return $converted-values;
+
+	}
+
+}
