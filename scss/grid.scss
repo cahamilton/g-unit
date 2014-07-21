@@ -156,6 +156,24 @@
 
 			}
 
+			@for $unit-count from 1 through ($ratio - 1) {
+
+				.push-#{$unit-prefix}-#{$unit-count}of#{$ratio} {
+					right: auto;
+					left: ($unit-count / $ratio) * 100%;
+				}
+
+			}
+
+			@for $unit-count from 1 through ($ratio - 1) {
+
+				.pull-#{$unit-prefix}-#{$unit-count}of#{$ratio} {
+					right: ($unit-count / $ratio) * 100%;
+					left: auto;
+				}
+
+			}
+
 		}
 
 	}
@@ -194,6 +212,24 @@
 					.#{$unit-prefix}-#{$unit-count}of#{$ratio} {
 						@extend %#{$unit-prefix}-base;
 						@include grid-unit-calc($unit-count, $ratio);
+					}
+
+				}
+
+				@for $unit-count from 1 through ($ratio - 1) {
+
+					.push-#{$unit-prefix}-#{$unit-count}of#{$ratio} {
+						right: auto;
+						left: ($unit-count / $ratio) * 100%;
+					}
+
+				}
+
+				@for $unit-count from 1 through ($ratio - 1) {
+
+					.pull-#{$unit-prefix}-#{$unit-count}of#{$ratio} {
+						right: ($unit-count / $ratio) * 100%;
+						left: auto;
 					}
 
 				}
