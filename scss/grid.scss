@@ -22,7 +22,6 @@
 ///  }
 ///
 ///  @group grid
-///
 
 @mixin grid-row {
   @include clearfix;
@@ -98,11 +97,18 @@
 ///  The grid generator mixin is used to loop through the
 ///  below @each statement.
 ///
-///  -----------------------------------------------------------------------------
+///  @example
+///  .grid {
+///    @include grid-generator("small", 320px, 320px, 6px, 2 3 4 6);
+///  }
 ///
-///  Example usage:
+///  @group grid
 ///
-///     @include grid-generator("small", 320px, 320px, 6px, 3 6 9);
+///  @param {String} $unit-prefix - the prefix of your element eg .small-1of2, .large-2of8
+///  @param {Number} $grid-breakpoint - the media query breakpoint associated with the unit classes
+///  @param {Number} $grid-container-width - the container width associated with the breakpoint
+///  @param {Number} $unit-gutter - the gutter width on either side of the unit classes
+///  @param {List} $unit-ratios - the ratio of unit classes - halves, thirds, quarters, sixths etc.
 
 @mixin grid-generator($unit-prefix, $grid-breakpoint, $grid-container-width, $unit-gutter, $unit-ratios) {
 
