@@ -2,17 +2,15 @@
 // Clearfix
 // ==========================================================================
 
-/**
- * The clearfix hack is a popular way to contain floats without resorting to using presentational markup.
- *
- * @author Nicolas Gallagher
- * @link http://nicolasgallagher.com/micro-clearfix-hack/
- *
- * @example
- * .container {
- *   @include clearfix;
- * }
- */
+///  The clearfix hack is a popular way to contain floats without resorting to using presentational markup.
+///
+///  @author Nicolas Gallagher
+///  @link http://nicolasgallagher.com/micro-clearfix-hack/
+///
+///  @example
+///  .container {
+///    @include clearfix;
+///  }
 
 @mixin clearfix {
 
