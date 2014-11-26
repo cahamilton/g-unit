@@ -17,32 +17,22 @@
 // Example usage:
 //
 //    .element {
-//        margin: em($values : 0 10px);
+//        margin: em($values: 0 10px);
 //        padding: em(10px 20px 30px 40px);
-//        font-size: em($values : 12px, $base-value : 18px);
+//        font-size: em($values: 12px, $base-value: 18px);
 //    }
 //
 
 @function em($values, $base-value: $default-font-size) {
 
-	// Check if values exceeds maximum allowed
-	@if length($values) > 4 {
-
-		@warn "Function arguments exceed the maximum of 4 allowed.";
-
-		// Return nothing
-		@return null;
-
-	}
-
 	@if $values == null {
-		@return null;
-	}
 
-	@else {
+    @return null;
 
-		// Created list with no values
-		$converted-values : () ;
+  } @else {
+
+    // Created empty list
+		$converted-values: ();
 
 		@each $value in $values {
 

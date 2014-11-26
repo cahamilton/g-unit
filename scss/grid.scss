@@ -1,198 +1,194 @@
-// -----------------------------------------------------------------------------
+@charset "UTF-8";
+
+// ==========================================================================
 // Imports
-// -----------------------------------------------------------------------------
+// ==========================================================================
 
-@import "mixins";
-@import "functions";
+@import "g-unit/mixins";
+@import "g-unit/functions";
+@import "g-unit/settings";
 
-@import "grid-settings";
 
-// -----------------------------------------------------------------------------
+// =========
 // Grid Row
-// -----------------------------------------------------------------------------
-//
-// Grid row mixin is used to create a container around the grid units. A
-// cleafix is applied to contain and clear floats inside.
-//
-// -----------------------------------------------------------------------------
-//
-// Example usage:
-//
-//    .row {
-//        @include grid-row;
-//    }
-//
+// =========
+
+///  Grid row mixin is used to create a container around the grid units. A cleafix is applied to contain and clear floats
+///  inside.
+///
+///  @example
+///  .row {
+///    @include grid-row;
+///  }
+///
+///  @group grid
+///
 
 @mixin grid-row {
-	@include clearfix;
+  @include clearfix;
 }
 
 
-// -----------------------------------------------------------------------------
+// ===============
 // Grid Unit Base
-// -----------------------------------------------------------------------------
-//
-// Grid unit base is used to create the base properties for units.
-//
-// Arguments:
-//
-// 1. $gutter - default set to $default-unit-gutter (_grid-settings.scss)
-//
-// 2. $float - default set to $default-unit-float (_grid-settings.scss)
-//
-// -----------------------------------------------------------------------------
-//
-// Example usage:
-//
-//    .unit {
-//        @include grid-unit-base(20px, right);
-//    }
-//
+// ===============
+
+///  Grid unit base is used to create the base properties for units.
+///
+///  @example
+///  .unit {
+///    @include grid-unit-base($gutter: 20px, $float: right);
+///  }
+///
+///  @group grid
+///
+///  @param {Number} $gutter ($default-unit-gutter) - default gutter width of unit
+///  @param {String} $float ($default-unit-float) - default float direction of unit
 
 @mixin grid-unit-base($gutter: $default-unit-gutter, $float: $default-unit-float) {
-	position: relative;
-	float: $float;
+  position: relative;
+  float: $float;
 
-	@if $gutter != null and $gutter > 0 {
-		padding-right: em($gutter);
-		padding-left: em($gutter);
-	}
+  @if $gutter != null and $gutter > 0 {
+    padding-right: em($gutter);
+    padding-left: em($gutter);
+  }
 
 }
 
 
-// -----------------------------------------------------------------------------
+// ===============
 // Grid Unit Calc
-// -----------------------------------------------------------------------------
-//
-// Grid unit calc is used to calculate width measurements for units.
-//
-// Arguments:
-//
-// 1. $count - a unit count of the total ratio
-//
-// 2. $ratio - the total number of units in the ratio
-//
-// -----------------------------------------------------------------------------
-//
-// Example usage:
-//
-//    .unit-4of7 {
-//        @include grid-unit-calc(4, 7);
-//    }
-//
+// ===============
+
+///  Grid unit calc is used to calculate width measurements for units.
+///
+///  @example
+///  .unit-4of7 {
+///    @include grid-unit-calc(4, 7);
+///  }
+///
+///  @example
+///  .unit-1of5 {
+///    @include grid-unit-calc($count: 1, $ratio: 5);
+///  }
+///
+///  @group grid
+///
+///  @param {Number} $count - a unit count of the total ratio
+///  @param {Number} $ratio - the total number of units in the ratio
 
 @mixin grid-unit-calc($count, $ratio) {
 
-	@if $count > $ratio {
-		@warn "Mixin $count argument should not be greater than the $ratio argument (#{$count} > #{$ratio}). Please address your mixin values and try again.";
-	}
+  @if $count > $ratio {
+    @warn "Mixin $count argument should not be greater than the $ratio argument (#{$count} > #{$ratio}). Please address your mixin values and try again.";
+  }
 
-	@else {
-		width: ($count / $ratio) * 100%;
-	}
+  @else {
+    width: ($count / $ratio) * 100%;
+  }
 
 }
 
 
-// -----------------------------------------------------------------------------
+// ===============
 // Grid Generator
-// -----------------------------------------------------------------------------
-//
-// The grid generator mixin will be used to loop through the
-// below @each statement.
-//
-// -----------------------------------------------------------------------------
-//
-// Example usage:
-//
-//    @include grid-generator("small", 320px, 320px, 6px, 3 6 9);
-//
+// ===============
+
+///  The grid generator mixin is used to loop through the
+///  below @each statement.
+///
+///  -----------------------------------------------------------------------------
+///
+///  Example usage:
+///
+///     @include grid-generator("small", 320px, 320px, 6px, 3 6 9);
 
 @mixin grid-generator($unit-prefix, $grid-breakpoint, $grid-container-width, $unit-gutter, $unit-ratios) {
 
-	@if $grid-breakpoint == null {
+  @if $grid-breakpoint == null {
 
-		.#{$grid-container-class-name} {
-			width: em($grid-container-width);
-		}
+    .#{$grid-container-class-name} {
+      width: em($grid-container-width);
+    }
 
-		.#{$grid-row-class-name} {
+    .#{$grid-row-class-name} {
 
-			& & {
-				// Nested grid rows
-				margin-right: -#{em($unit-gutter)};
-				margin-left: -#{em($unit-gutter)};
-			}
-		}
+      & & {
+        // Nested grid rows
+        margin-right: -#{em($unit-gutter)};
+        margin-left: -#{em($unit-gutter)};
+      }
 
-		%#{$unit-prefix}-base {
-			@include grid-unit-base($unit-gutter);
-		}
+    }
 
-		.#{$unit-prefix} {
-			@extend %#{$unit-prefix}-base;
-			width: 100%;
-		}
+    %#{$unit-prefix}-base {
+      @include grid-unit-base($unit-gutter);
+    }
 
-		@each $ratio in $unit-ratios {
+    .#{$unit-prefix} {
+      @extend %#{$unit-prefix}-base;
+      width: 100%;
+    }
 
-			@for $unit-count from 1 through ($ratio - 1) {
+    @each $ratio in $unit-ratios {
 
-				.#{$unit-prefix}-#{$unit-count}of#{$ratio} {
-					@extend %#{$unit-prefix}-base;
-					@include grid-unit-calc($unit-count, $ratio);
-				}
+      @for $unit-count from 1 through ($ratio - 1) {
 
-			}
+        .#{$unit-prefix}-#{$unit-count}of#{$ratio} {
+          @extend %#{$unit-prefix}-base;
+          @include grid-unit-calc($unit-count, $ratio);
+        }
 
-		}
+      }
 
-	}
+    }
 
-	@else {
+  }
 
-		@media only screen and (min-width: $grid-breakpoint) {
+  @else {
 
-			.#{$grid-container-class-name} {
-				width: auto;
-				max-width: em($grid-container-width);
-			}
+    @media only screen and (min-width: $grid-breakpoint) {
 
-			.#{$grid-row-class-name} {
+      .#{$grid-container-class-name} {
+        width: auto;
+        max-width: em($grid-container-width);
+      }
 
-				& & {
-					// Nested grid rows
-					margin-right: -#{em($unit-gutter)};
-					margin-left: -#{em($unit-gutter)};
-				}
-			}
+      .#{$grid-row-class-name} {
 
-			%#{$unit-prefix}-base {
-				@include grid-unit-base($unit-gutter);
-			}
+        & & {
+          // Nested grid rows
+          margin-right: -#{em($unit-gutter)};
+          margin-left: -#{em($unit-gutter)};
+        }
+      }
 
-			.#{$unit-prefix} {
-				@extend %#{$unit-prefix}-base;
-				width: 100%;
-			}
+      %#{$unit-prefix}-base {
+        @include grid-unit-base($unit-gutter);
+      }
 
-			@each $ratio in $unit-ratios {
+      .#{$unit-prefix} {
+        @extend %#{$unit-prefix}-base;
+        width: 100%;
+      }
 
-				@for $unit-count from 1 through ($ratio - 1) {
+      @each $ratio in $unit-ratios {
 
-					.#{$unit-prefix}-#{$unit-count}of#{$ratio} {
-						@extend %#{$unit-prefix}-base;
-						@include grid-unit-calc($unit-count, $ratio);
-					}
+        @for $unit-count from 1 through ($ratio - 1) {
 
-				}
+          .#{$unit-prefix}-#{$unit-count}of#{$ratio} {
+            @extend %#{$unit-prefix}-base;
+            @include grid-unit-calc($unit-count, $ratio);
+          }
 
-			}
+        }
 
-		}
+      }
 
-	}
+    }
+
+  }
 
 }
 
@@ -202,30 +198,30 @@
 // -----------------------------------------------------------------------------
 //
 // The below will start to construct your grid markup, based on the parameters
-// passed into the $grid-generator-map in _grid-settings.scss.
+// passed into the $grid-generator-map in _settings.scss.
 //
 // -----------------------------------------------------------------------------
 
 *,
 *:before,
 *:after {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .#{$grid-container-class-name} {
-	@include clearfix;
-	margin: auto;
-	width: 100%;
+  @include clearfix;
+  margin: auto;
+  width: 100%;
 }
 
 .#{$grid-row-class-name} {
-	@include grid-row;
+  @include grid-row;
 }
 
 @each $unit-prefix, $grid-breakpoint, $grid-container-width, $unit-gutter, $unit-ratios in $grid-generator-map {
 
-	@include grid-generator($unit-prefix, $grid-breakpoint, $grid-container-width, $unit-gutter, $unit-ratios);
+  @include grid-generator($unit-prefix, $grid-breakpoint, $grid-container-width, $unit-gutter, $unit-ratios);
 
 }

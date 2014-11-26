@@ -1,11 +1,14 @@
-// -----------------------------------------------------------------------------
-// Imports
-// -----------------------------------------------------------------------------
+@charset "UTF-8";
 
-@import "functions";
-@import "mixins";
+// Base setup components
+@import "g-unit/functions";
+@import "g-unit/mixins";
+@import "g-unit/settings";
 
-@import "grid-settings";
+// CSS Resets
+@import "g-unit/normalize";
+
+
 
 // -----------------------------------------------------------------------------
 // Body Elements
