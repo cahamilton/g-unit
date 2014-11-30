@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var minifyCSS = require('gulp-minify-css');
+var scsslint = require('gulp-scss-lint');
 
 var config = {
   paths: {
@@ -16,7 +17,7 @@ var config = {
 
 gulp.task('sass', function() {
 
-  return gulp.src(config.paths.styles.sass + '**/*.scss')
+  return gulp.src('**/*.scss', {cwd: config.paths.styles.sass})
     .pipe(sass({
       outputStyle: 'nested',
       precision: 9
@@ -33,5 +34,26 @@ gulp.task('sass', function() {
     .pipe(gulp.dest(config.paths.styles.css));
 
 });
+
+
+gulp.task('scss-lint', function() {
+
+  gulp.src(['**/*.scss', '!**/vendor/**/*.scss'], {cwd: config.paths.styles.sass})
+    .pipe(scsslint({
+      config: '.scss-lint.yml'
+    }));
+
+});
+
+
+gulp.task('watch', function() {
+
+  gulp.watch(config.paths.styles.sass + '**/*.scss', [
+    'scss-lint',
+    'sass'
+  ]);
+
+});
+
 
 gulp.task('default', ['sass']);
