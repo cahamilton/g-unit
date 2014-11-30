@@ -25,29 +25,25 @@
 
 @function em($values, $base-value: $default-font-size) {
 
-	@if $values == null {
+  @if $values == null {
 
     @return null;
 
   } @else {
 
     // Created empty list
-		$converted-values: ();
+    $converted-values: ();
 
-		@each $value in $values {
+    @each $value in $values {
 
-			@if $value == 0 {
-				$value : 0px;
-			}
+      // Iterate through each value and append converted value to the list
+      $converted-values : append($converted-values, $value / $base-value * 1em);
 
-			// Iterate through each value and append converted value to the list
-			$converted-values : append($converted-values, $value / $base-value * 1em) ;
+    }
 
-		}
+    // Return newly populated list
+    @return $converted-values;
 
-		// Return newly populated list
-		@return $converted-values;
-
-	}
+  }
 
 }
