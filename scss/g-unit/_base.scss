@@ -14,14 +14,14 @@ html, body {
 
 html {
   background-image: url(http://basehold.it/i/#{$default-line-height / 1px}/000000);
-  font-size: 16px;
+  font-size: $base-font-size;
 }
 
 body {
   position: relative;
   line-height: $default-line-height / $default-font-size;
   font-family: "Helvetica Neue", Helvetica, Helvetica, Arial, sans-serif;
-  font-size: em($default-font-size);
+  font-size: em($default-font-size, $base-font-size);
   font-weight: normal;
   font-style: normal;
 }
@@ -56,7 +56,7 @@ a {
 // -----------------------------------------------------------------------------
 
 // All Headings //
-h1, h2, h3, h4, h5, h6 {
+%heading-base {
   color: #d9534f;
   font-family: "Ubuntu", sans-serif;
   font-weight: 500;
@@ -64,36 +64,42 @@ h1, h2, h3, h4, h5, h6 {
 
 // Individual Headings //
 h1 {
+  @extend %heading-base;
   margin: 0 0 em($default-line-height, $heading-1-font-size);
   line-height: em($default-line-height * 2, $heading-1-font-size);
   font-size: em($heading-1-font-size);
 }
 
 h2 {
+  @extend %heading-base;
   margin: 0 0 em($default-line-height, $heading-2-font-size);
   line-height: em($default-line-height * 2, $heading-2-font-size);
   font-size: em($heading-2-font-size);
 }
 
 h3 {
+  @extend %heading-base;
   margin: 0 0 em($default-line-height, $heading-3-font-size);
   line-height: em($default-line-height * 2, $heading-3-font-size);
   font-size: em($heading-3-font-size);
 }
 
 h4 {
+  @extend %heading-base;
   margin: 0 0 em($default-line-height, $heading-4-font-size);
   line-height: em($default-line-height * 2, $heading-4-font-size);
   font-size: em($heading-4-font-size);
 }
 
 h5 {
+  @extend %heading-base;
   margin: 0 0 em($default-line-height, $heading-5-font-size);
   line-height: em($default-line-height * 2, $heading-5-font-size);
   font-size: em($heading-5-font-size);
 }
 
 h6 {
+  @extend %heading-base;
   margin: 0 0 em($default-line-height, $heading-6-font-size);
   line-height: em($default-line-height * 2, $heading-6-font-size);
   font-size: em($heading-6-font-size);

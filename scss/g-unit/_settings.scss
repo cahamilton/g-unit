@@ -32,14 +32,16 @@ $grid-row-class-name: "g-row";
 // $unit-ratios - halves, thirds, quarters, sixths etc.
 
 $grid-generator-map:
-  ("gu", null, 1200px, 15px, 2 3),
-  ("gu-sml", 320px, null, 10px, 2 3),
-  ("gu-med", 768px, null, 10px, 2 3),
-  ("gu-lrg", 1200px, 1200px, 15px, 2 3);
+  ("gu", null, 1200px, 15px, 2 3 4 5 6 7 8),
+  ("gu-sml", 320px, null, 10px, 2 3 4 5 6 7 8),
+  ("gu-med", 768px, null, 10px, 2 3 4 5 6 7 8),
+  ("gu-lrg", 1200px, 1200px, 15px, 2 3 4 5 6 7 8);
 
 // ====================
 // Typography Settings
 // ====================
+
+$base-font-size: 16px; // Set default browser font-size. Recommended to leave this set as 16px.
 
 $default-font-size: 12px;
 $default-line-height: 16px;

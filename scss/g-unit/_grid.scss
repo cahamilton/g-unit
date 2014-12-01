@@ -148,7 +148,7 @@
 
   } @else {
 
-    @media only screen and (min-width: $grid-breakpoint) {
+    @media only screen and (min-width: em($grid-breakpoint, $base-font-size)) {
 
       .#{$grid-container-class-name} {
         width: auto;
