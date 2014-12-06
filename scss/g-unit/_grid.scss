@@ -193,14 +193,12 @@
 }
 
 
-// -----------------------------------------------------------------------------
+// ============
 // Grid Markup
-// -----------------------------------------------------------------------------
-//
+// ============
+
 // The below will start to construct your grid markup, based on the parameters
 // passed into the $grid-generator-map in _settings.scss.
-//
-// -----------------------------------------------------------------------------
 
 .#{$grid-container-class-name} {
   @include clearfix;
