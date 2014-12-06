@@ -1,0 +1,54 @@
+// ==========================================================================
+// Settings
+// ==========================================================================
+
+
+// ==============
+// Grid Settings
+// ==============
+
+$default-unit-gutter: 15px;
+$default-unit-float: left;
+
+$grid-container-class-name: "g-container";
+$grid-row-class-name: "g-row";
+
+// ===================
+// Grid Generator Map
+// ===================
+
+// The following Sass Map will help generate the grid markup. This will pass
+// values into the grid-generator @mixin and through an @each statement (for
+// each list in the map)
+
+// The values are as follows:
+// $map:($unit-prefix, $grid-container-width, $grid-breakpoint, $unit-gutter,
+// $unit-ratios)
+
+// $unit-prefix - the class prefix eg .small-1of2, .large-2of8
+// $grid-breakpoint - the MQ breakpoint associated with the unit classes
+// $grid-container-width - the container width associated with the breakpoint
+// $unit-gutter - the gutter width on either side of the unit classes
+// $unit-ratios - halves, thirds, quarters, sixths etc.
+
+$grid-generator-map:
+  ("gu", null, 1200px, 15px, 2 3 4 5 6 7 8),
+  ("gu-sml", 320px, null, 10px, 2 3 4 5 6 7 8),
+  ("gu-med", 768px, null, 10px, 2 3 4 5 6 7 8),
+  ("gu-lrg", 1200px, 1200px, 15px, 2 3 4 5 6 7 8);
+
+// ====================
+// Typography Settings
+// ====================
+
+$base-font-size: 16px; // Set default browser font-size. Recommended to leave this set as 16px.
+
+$default-font-size: 12px;
+$default-line-height: 16px;
+
+$heading-1-font-size: 34px;
+$heading-2-font-size: 30px;
+$heading-3-font-size: 26px;
+$heading-4-font-size: 22px;
+$heading-5-font-size: 18px;
+$heading-6-font-size: 16px;

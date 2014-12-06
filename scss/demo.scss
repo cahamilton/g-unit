@@ -1,35 +1,35 @@
-// -----------------------------------------------------------------------------
+// ==========================================================================
 // Imports
-// -----------------------------------------------------------------------------
+// ==========================================================================
 
-@import "functions";
-@import "mixins";
+@import "g-unit/functions";
+@import "g-unit/mixins";
 
-@import "grid-settings";
+@import "g-unit/settings";
 
-// -----------------------------------------------------------------------------
+// ==========================================================================
 // Demo Styles
-// -----------------------------------------------------------------------------
+// ==========================================================================
 
 .g-row {
-	margin-bottom: em($default-line-height);
-	background: rgba(217, 83, 79, 0.25);
+  margin-bottom: em($default-line-height);
+  background: rgba(217, 83, 79, 0.25);
 
-	& & {background: rgba(79, 213, 217, 0.25);}
+  & & {background: rgba(79, 213, 217, 0.25);}
 }
 
 [class*="gu"] {
-	border-right: 1px solid;
-	border-left: 1px solid;
-	border-color: rgba(217, 83, 79, 0.25);
-	background: rgba(217, 83, 79, 0.25);
+  border-right: 1px solid;
+  border-left: 1px solid;
+  border-color: rgba(217, 83, 79, 0.25);
+  background: rgba(217, 83, 79, 0.25);
 
-	& & {
-		border-color: rgba(79, 213, 217, 0.25);
-		background: rgba(79, 213, 217, 0.25);
-	}
+  & & {
+    border-color: rgba(79, 213, 217, 0.25);
+    background: rgba(79, 213, 217, 0.25);
+  }
 }
 
 .inner {
-	background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.25);
 }
