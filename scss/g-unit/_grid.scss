@@ -122,11 +122,8 @@
 
 @mixin grid-generator($unit-prefix, $grid-breakpoint, $grid-container-width, $unit-gutter, $unit-ratios) {
 
-  @if $grid-breakpoint == null {
-
-    .#{$grid-container-class-name} {
-      width: em($grid-container-width);
-    }
+  // Create @mixin to reuse common properties between grids with and without a breakpoint
+  @mixin grid-generator-common-properties {
 
     .#{$grid-row-class-name} {
 
@@ -178,6 +175,17 @@
 
     }
 
+  }
+
+  // Construct grids
+  @if $grid-breakpoint == null {
+
+    .#{$grid-container-class-name} {
+      width: em($grid-container-width);
+    }
+
+    @include grid-generator-common-properties;
+
   } @else {
 
     @media only screen and (min-width: em($grid-breakpoint, $base-font-size)) {
@@ -187,54 +195,7 @@
         max-width: em($grid-container-width);
       }
 
-      .#{$grid-row-class-name} {
-
-        & & {
-          // Nested grid rows
-          margin-right: -#{em($unit-gutter)};
-          margin-left: -#{em($unit-gutter)};
-        }
-      }
-
-      %#{$unit-prefix}-base {
-        @include grid-unit-base($unit-gutter);
-      }
-
-      .#{$unit-prefix} {
-        @extend %#{$unit-prefix}-base;
-        width: 100%;
-      }
-
-      @each $ratio in $unit-ratios {
-
-        @for $unit-count from 1 through ($ratio - 1) {
-
-          .#{$unit-prefix}-#{$unit-count}of#{$ratio} {
-            @extend %#{$unit-prefix}-base;
-            @include grid-unit-calc($unit-count, $ratio);
-          }
-
-        }
-
-        @for $unit-count from 1 through ($ratio - 1) {
-
-          .push-#{$unit-prefix}-#{$unit-count}of#{$ratio} {
-            right: auto;
-            left: ($unit-count / $ratio) * 100%;
-          }
-
-        }
-
-        @for $unit-count from 1 through ($ratio - 1) {
-
-          .pull-#{$unit-prefix}-#{$unit-count}of#{$ratio} {
-            right: ($unit-count / $ratio) * 100%;
-            left: auto;
-          }
-
-        }
-
-      }
+      @include grid-generator-common-properties;
 
     }
 
