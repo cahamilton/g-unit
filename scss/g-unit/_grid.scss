@@ -2,7 +2,6 @@
 // Grid
 // ==========================================================================
 
-
 // =========
 // Grid Row
 // =========
@@ -20,7 +19,6 @@
 @mixin grid-row {
   @include clearfix;
 }
-
 
 // ===============
 // Grid Unit Base
@@ -48,7 +46,6 @@
   }
 
 }
-
 
 // ===============
 // Grid Unit Calc
@@ -98,7 +95,6 @@
   }
 
 }
-
 
 // ===============
 // Grid Generator
@@ -155,20 +151,38 @@
 
       }
 
-      @for $unit-count from 1 through ($ratio - 1) {
+    }
 
-        .push-#{$unit-prefix}-#{$unit-count}of#{$ratio} {
-          right: auto;
-          left: ($unit-count / $ratio) * 100%;
+    @if $grid-push-pull-classes == true {
+
+      [class*="push-#{$unit-prefix}-"] {
+        right: auto;
+      }
+
+      @each $ratio in $unit-ratios {
+
+        @for $unit-count from 1 through ($ratio - 1) {
+
+          .push-#{$unit-prefix}-#{$unit-count}of#{$ratio} {
+            left: ($unit-count / $ratio) * 100%;
+          }
+
         }
 
       }
 
-      @for $unit-count from 1 through ($ratio - 1) {
+      [class*="pull-#{$unit-prefix}-"] {
+        left: auto;
+      }
 
-        .pull-#{$unit-prefix}-#{$unit-count}of#{$ratio} {
-          right: ($unit-count / $ratio) * 100%;
-          left: auto;
+      @each $ratio in $unit-ratios {
+
+        @for $unit-count from 1 through ($ratio - 1) {
+
+          .pull-#{$unit-prefix}-#{$unit-count}of#{$ratio} {
+            right: ($unit-count / $ratio) * 100%;
+          }
+
         }
 
       }
@@ -203,7 +217,6 @@
 
 }
 
-
 // ============
 // Grid Markup
 // ============
@@ -232,17 +245,17 @@
 }
 
 .gu-sass-push-pull-test-1 {
-  @include grid-unit-calc(1, 4, 3, null);
+  @include grid-unit-calc($count: 1, $ratio: 4, $push: 3, $pull: null);
 }
 
 .gu-sass-push-pull-test-2 {
-  @include grid-unit-calc(1, 4, 1, null);
+  @include grid-unit-calc($count: 1, $ratio: 4, $push: 1, $pull: null);
 }
 
 .gu-sass-push-pull-test-3 {
-  @include grid-unit-calc(1, 4, null, 1);
+  @include grid-unit-calc($count: 1, $ratio: 4, $push: null, $pull: 1);
 }
 
 .gu-sass-push-pull-test-4 {
-  @include grid-unit-calc(1, 4, null, 3);
+  @include grid-unit-calc($count: 1, $ratio: 4, $push: null, $pull: 3);
 }
