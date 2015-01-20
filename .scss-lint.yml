@@ -1,12 +1,13 @@
 # SCSS-Lint Configuration
 # https://github.com/causes/scss-lint/blob/master/lib/scss_lint/linter/README.md
 
+
 linters:
 
-  BorderZero:
+  BangFormat:
     enabled: true
 
-  CapitalizationInSelector:
+  BorderZero:
     enabled: true
 
   ColorKeyword:
@@ -50,8 +51,12 @@ linters:
   HexValidation:
     enabled: true
 
-  IdWithExtraneousSelector:
+  IdSelector:
     enabled: true
+
+  ImportPath:
+    leading_underscore: false
+    filename_extension: false
 
   Indentation:
     enabled: true
@@ -60,7 +65,7 @@ linters:
 
   LeadingZero:
     enabled: false
-    style: exclude_zero
+    style: include_zero
 
   MergeableSelector:
     enabled: true
@@ -74,19 +79,26 @@ linters:
     enabled: false
 
   PropertySortOrder:
-    enabled: true
-    order: concentric
+    enabled: false
     ignore_unspecified: false
-    exclude:
-      - scss/g-unit/mixins/_clearfix.scss
 
   PropertySpelling:
     enabled: true
     extra_properties: []
 
+  QualifyingElement:
+    enabled: true
+    allow_element_with_attribute: false
+    allow_element_with_class: false
+    allow_element_with_id: false
+
   SelectorDepth:
     enabled: true
     max_depth: 3
+
+  SelectorFormat:
+    enabled: true
+    convention: hyphenated_lowercase
 
   Shorthand:
     enabled: true
@@ -96,7 +108,7 @@ linters:
     allow_single_line_rule_sets: true
 
   SingleLinePerSelector:
-    enabled: false
+    enabled: true
 
   SpaceAfterComma:
     enabled: true
@@ -123,6 +135,9 @@ linters:
   TrailingSemicolon:
     enabled: true
 
+  TrailingZero:
+    enabled: true
+
   UnnecessaryMantissa:
     enabled: true
 
@@ -140,3 +155,4 @@ linters:
 
   Compass::*:
     enabled: false
+
