@@ -15,7 +15,7 @@ var config = {
   }
 };
 
-gulp.task('sass', function() {
+gulp.task('sass', ['scss-lint'], function() {
 
   return gulp.src('**/*.scss', {cwd: config.paths.styles.sass})
     .pipe(sass({
@@ -49,7 +49,6 @@ gulp.task('scss-lint', function() {
 gulp.task('watch', function() {
 
   gulp.watch(config.paths.styles.sass + '**/*.scss', [
-    'scss-lint',
     'sass'
   ]);
 
