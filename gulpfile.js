@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var minifyCSS = require('gulp-minify-css');
-var scsslint = require('gulp-scss-lint');
+var sassLint = require('gulp-sass-lint');
 
 var config = {
   paths: {
@@ -12,47 +12,38 @@ var config = {
       sass: 'scss/',
       css: 'css/'
     }
-  }
-};
-
-gulp.task('sass', ['scss-lint'], function() {
-
-  return gulp.src('**/*.scss', {cwd: config.paths.styles.sass})
-    .pipe(sass({
-      outputStyle: 'nested',
-      precision: 9
-    }))
-    .pipe(autoprefixer({
+  },
+  autoprefixer: {
+    options: {
       browsers: [
         'last 2 versions',
         'ie >= 8',
         '> 1%'
       ],
       cascade: false
-    }))
+    }
+  },
+  sass: {
+    options: {
+      outputStyle: 'nested',
+      precision: 9
+    }
+  }
+};
+
+gulp.task('sass', function() {
+  return gulp.src(['**/*.scss', '!**/vendor/**/*.scss'], {cwd: config.paths.styles.sass})
+    .pipe(sassLint())
+    .pipe(sassLint.format())
+    .pipe(sassLint.failOnError())
+    .pipe(sass(config.sass.options))
+    .pipe(autoprefixer(config.autoprefixer.options))
     .pipe(minifyCSS())
     .pipe(gulp.dest(config.paths.styles.css));
-
 });
-
-
-gulp.task('scss-lint', function() {
-
-  return gulp.src(['**/*.scss', '!**/vendor/**/*.scss'], {cwd: config.paths.styles.sass})
-    .pipe(scsslint({
-      config: '.scss-lint.yml'
-    }));
-
-});
-
 
 gulp.task('watch', function() {
-
-  gulp.watch(config.paths.styles.sass + '**/*.scss', [
-    'sass'
-  ]);
-
+  gulp.watch(config.paths.styles.sass + '**/*.scss', ['sass']);
 });
-
 
 gulp.task('default', ['sass']);
